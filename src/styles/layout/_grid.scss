@@ -1,0 +1,23 @@
+.grid {
+  display: grid;
+
+  grid-template-columns: repeat(8, minmax(min-content, 1fr));
+  grid-template-rows: repeat(6, minmax(min-content, max-content));
+
+  grid-row-gap: 4.4rem;
+  max-width: 120rem;
+  padding: 0 7rem;
+
+  @include respond(largest) {
+    padding: 0 0;
+    margin: 0 auto;
+  }
+
+  @include respond(large) {
+    padding: 0 3rem;
+  }
+
+  @include respond(small) {
+    padding: 0 1rem;
+  }
+}

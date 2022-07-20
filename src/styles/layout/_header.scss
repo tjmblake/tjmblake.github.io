@@ -1,0 +1,43 @@
+.header {
+  grid-column: 1 / -1;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+
+  padding: calc(2rem) 0;
+
+  @include respond(small) {
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(2, min-content);
+    row-gap: 1rem;
+  }
+
+  &__group {
+    display: flex;
+    gap: 3.5rem;
+
+    @include respond(small) {
+      justify-content: space-around;
+    }
+  }
+
+  &__link,
+  &__link:link,
+  &__link:visited,
+  &__link:active {
+    color: white;
+    font-size: 1.6rem;
+    text-decoration: none;
+    transition: transform 0.2s;
+
+    &:hover {
+      color: $color-primary;
+      transform: translateY(-2px);
+    }
+
+    @include respond(small) {
+      width: 33%;
+      text-align: center;
+    }
+  }
+}

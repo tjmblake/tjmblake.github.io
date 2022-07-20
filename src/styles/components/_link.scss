@@ -1,0 +1,12 @@
+.link {
+  color: $color-primary;
+  text-decoration: underline;
+  display: inline-block;
+
+  transition: all 0.2s;
+
+  &:hover {
+    color: $color-white;
+    transform: translateY(-3px);
+  }
+}
