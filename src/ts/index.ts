@@ -13,12 +13,21 @@ anime({
     ".hero .hero__title",
     ".hero .hero__lead",
     ".header .header__group .header__link",
+    ".projects",
+    ".skills",
   ],
+  opacity: 0,
+  duration: 0,
+});
+anime({
+  targets: [".projects p"],
+  translateX: anime.stagger(500, { grid: [2, 2], from: "center", axis: "x" }),
   opacity: 0,
   duration: 0,
 });
 
 window.onload = async () => {
+  console.log(innerHeight);
   const options = {
     cursorOuter: "circle-basic",
     hoverEffect: "pointer-overlay",
@@ -30,6 +39,71 @@ window.onload = async () => {
   magicMouse(options);
 
   await wait(0.2);
+
+  const heroArrowAnimation = anime({
+    targets: ".hero .hero__scroll-icon",
+    opacity: [1, 0],
+    easing: "easeInOutSine",
+    duration: 300,
+    autoplay: false,
+  });
+
+  const projectSectionAnimation = anime({
+    targets: ".projects",
+    keyframes: [
+      { translateY: 30, opacity: 0 },
+      { translateY: 0, opacity: 1 },
+    ],
+    easing: "easeInOutSine",
+    duration: 300,
+    autoplay: false,
+  });
+
+  const projectsAnimation = anime({
+    targets: ".projects p",
+    translateX: anime.stagger(0, {
+      grid: [2, 2],
+      from: "center",
+      axis: "x",
+    }),
+    opacity: 1,
+
+    easing: "easeInOutSine",
+    delay: anime.stagger(40, { start: 200 }),
+    duration: 300,
+    autoplay: false,
+  });
+
+  const skillSectionAnimation = anime({
+    targets: ".skills",
+    keyframes: [
+      { translateY: 30, opacity: 0 },
+      { translateY: 0, opacity: 1 },
+    ],
+    easing: "easeInOutSine",
+    duration: 300,
+    delay: 600,
+    autoplay: false,
+  });
+
+  const skillsGroupAnimation = anime({
+    targets: ".skills .skills__group *",
+    scale: [0, 1],
+    duration: 300,
+    delay: anime.stagger(20, { start: 600 }),
+    easing: "easeOutElastic",
+    autoplay: false,
+  });
+
+  const contactAnimation = anime({
+    targets: ".contact",
+    opacity: [0, 1],
+    duration: 300,
+    delay: 800,
+    autoplay: false,
+    easing: "easeInOutSine",
+  });
+
   // Load in Nav bar
   anime({
     targets: ".header .header__group .header__link",
@@ -39,7 +113,7 @@ window.onload = async () => {
     easing: "easeInQuad",
   });
 
-  await wait(1);
+  await wait(0.7);
   // Load Images & Flip to avoid drastic cut.
   // Add fade for more natural load
   const dogs = document.querySelector("#dogs");
@@ -64,17 +138,22 @@ window.onload = async () => {
     });
   }
 
-  await wait(0.5);
-
   // Hero Text
   anime({
     targets: [".hero .hero__title", ".hero .hero__lead"],
     opacity: 1,
     translateX: [75, 0],
-    delay: anime.stagger(500), // increase delay by 100ms for each elements.
+    delay: anime.stagger(500, { start: 700 }), // increase delay by 100ms for each elements.
     duration: 2000,
     easing: "easeOutElastic",
   });
 
-  await wait(1);
+  window.onscroll = (e) => {
+    heroArrowAnimation.seek(scrollY);
+    projectSectionAnimation.seek(scrollY);
+    projectsAnimation.seek(scrollY);
+    skillSectionAnimation.seek(scrollY);
+    skillsGroupAnimation.seek(scrollY);
+    contactAnimation.seek(scrollY);
+  };
 };

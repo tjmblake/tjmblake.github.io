@@ -141,4 +141,86 @@
       padding: 2rem 0.5rem;
     }
   }
+
+  &__scroll-icon {
+    grid-column: 1 / -1;
+    grid-row: -1;
+    justify-self: center;
+
+    position: relative;
+
+    border-bottom: 0.1rem solid #fff;
+    border-right: 0.1rem solid #fff;
+    opacity: 1;
+    height: 1rem;
+    width: 1rem;
+
+    transform: rotate(45deg);
+    margin-top: 12rem;
+
+    @include respond(largest) {
+      margin-top: 12rem;
+    }
+
+    @include respond(large) {
+      margin-top: 8rem;
+    }
+
+    @include respond(medium) {
+      margin-top: 6rem;
+    }
+
+    @include respond(small) {
+      margin-top: 3rem;
+    }
+
+    &::before,
+    &::after {
+      content: " ";
+      position: absolute;
+      height: 1rem;
+      width: 1rem;
+      border-bottom: 0.1rem solid #fff;
+      border-right: 0.1rem solid #fff;
+    }
+
+    &::before {
+      top: 5px;
+      left: 5px;
+      animation-name: floatDown;
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      animation-duration: 2s;
+    }
+
+    &::after {
+      top: -5px;
+      left: -5px;
+      animation-name: floatUp;
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      animation-duration: 2s;
+    }
+  }
+}
+
+@keyframes floatDown {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  100% {
+    transform: translate(0.1rem, 0.1rem) scale(1.05);
+  }
+}
+@keyframes floatUp {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  100% {
+    transform: translate(-0.1rem, -0.1rem) scale(1.05);
+  }
 }

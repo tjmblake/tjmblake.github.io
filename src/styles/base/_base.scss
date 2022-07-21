@@ -9,6 +9,7 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%; // 1 rem is 10 px;
+  overflow-x: hidden;
 
   @include respond(small) {
     font-size: 50%;
@@ -22,4 +23,5 @@ a:hover {
 body {
   background-color: $color-grey;
   color: $color-white;
+  overflow-x: hidden;
 }
