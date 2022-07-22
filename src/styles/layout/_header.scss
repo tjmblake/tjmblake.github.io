@@ -4,12 +4,13 @@
   display: grid;
   grid-template-columns: 1fr auto;
 
-  padding: calc(2rem) 0;
+  padding: 2rem 0;
 
   @include respond(small) {
     grid-template-columns: 100%;
     grid-template-rows: repeat(2, min-content);
     row-gap: 1rem;
+    padding: 1rem 0;
   }
 
   &__group {

@@ -89,7 +89,7 @@
   }
 
   &__title {
-    display: inline-block;
+    display: inline;
     grid-column: 4/9;
     grid-row: 1/2;
     text-align: right;
@@ -97,11 +97,22 @@
     z-index: 2;
     line-height: 1.5;
 
+    @include respond(small) {
+      grid-column: 3/9;
+    }
+
     &-spanner {
       background-color: rgba($color-grey, 0.8);
       border-radius: 3rem;
       box-decoration-break: clone;
       padding: 1rem;
+
+      &-br {
+        display: none;
+        @include respond(small) {
+          display: inline;
+        }
+      }
     }
   }
 

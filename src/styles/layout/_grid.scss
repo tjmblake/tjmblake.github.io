@@ -19,5 +19,6 @@
 
   @include respond(small) {
     padding: 0 1rem;
+    grid-row-gap: 2rem;
   }
 }
