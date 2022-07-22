@@ -90,18 +90,9 @@ window.onload = async () => {
     targets: ".skills .skills__group *",
     scale: [0, 1],
     duration: 300,
-    delay: anime.stagger(20, { start: 600 }),
+    delay: anime.stagger(20, { start: 700 }),
     easing: "easeOutElastic",
     autoplay: false,
-  });
-
-  const contactAnimation = anime({
-    targets: ".contact",
-    opacity: [0, 1],
-    duration: 300,
-    delay: 800,
-    autoplay: false,
-    easing: "easeInOutSine",
   });
 
   // Load in Nav bar
@@ -154,6 +145,5 @@ window.onload = async () => {
     projectsAnimation.seek(scrollY);
     skillSectionAnimation.seek(scrollY);
     skillsGroupAnimation.seek(scrollY);
-    contactAnimation.seek(scrollY);
   };
 };

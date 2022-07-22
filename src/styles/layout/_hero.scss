@@ -219,19 +219,19 @@
 
 @keyframes floatDown {
   0% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate(0px, 0px) scale(0.95);
   }
 
   100% {
-    transform: translate(0.1rem, 0.1rem) scale(1.05);
+    transform: translate(0.1rem, 0.1rem) scale(0.75);
   }
 }
 @keyframes floatUp {
   0% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate(0px, 0px) scale(1.05);
   }
 
   100% {
-    transform: translate(-0.1rem, -0.1rem) scale(1.05);
+    transform: translate(-0.1rem, -0.1rem) scale(1.25);
   }
 }
