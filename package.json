@@ -6,7 +6,8 @@
   "scripts": {
     "build": "env NODE_ENV=production npx eleventy --pathprefix 'public'",
     "test": "npx eleventy --serve",
-    "webpack": "webpack --watch"
+    "webpack": "webpack",
+    "webpack:watch": "webpack --watch"
   },
   "author": "Thomas Blake",
   "license": "ISC",
