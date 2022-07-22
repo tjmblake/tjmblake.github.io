@@ -1,10 +1,10 @@
 ---
-title: Building Cyclr Sandbox
+title: Improving Onboarding Speed and Quality by 200%+
 ---
 
-# Building Cyclr Sandbox
+# Improving Onboarding Speed and Quality by 200%+
 
-### Improving the onboarding of Connector Developers
+### Taking a 1 month onboarding to a 4 day onboarding
 
 <figure>
     <img src="../../img/cyclr-sandbox/cyclr-sandbox-login.png">
@@ -13,26 +13,28 @@ title: Building Cyclr Sandbox
 
 ## Quick Intro
 
-At Cyclr, an iPaaS company which provides a high-quality integration platform to businesses, I develop and maintain Integrations.
+At Cyclr, an iPaaS company which provides a zero-code integration platform to businesses, I develop and maintain integrations.
 
 Cyclr is a growing company with recent investment.
 
-However, with each new developer, begins a period of onboarding - getting them up to speed with our tools and systems.
+However, with each new developer, begins a period of onboarding - getting them up to speed with our tools and systems. This can take up to 2 weeks per new starter.
 
 This primarily consists of working with a developer on whichever problems were within the Sprint.
 
-### This had some issues:
+## This had some issues:
 
-- By working on tasks in the Sprint, new developers' learning process was unstructured. Learning can be sped up by building ontop of the skills of each lesson, rather than jumping between topics.
+- New developers' learning process was unstructured. Learning can be sped up by building ontop of the skills of each lesson, rather than jumping between topics.
 - Developers had to think reactively to explain each topic as it appeared, which is not the best way to teach consisely and clearly.
 - Developers found 90% (made up statistic) of what they were saying had been repeated to the previous developers. If it's repeatable - it should be automated.
 - New developers had little time to reflect and revise what they had just learned, as they were jumping between topics.
 
 ## The Solution
 
-I began a front-end lesson app (containing diagrams, quizzes, API documentation and more) combined with a back-end API which the new developers could interact with as they proceed through the lessons.
+Please see my presentation to understand the previous issues with the onboarding process, and how we intend to improve these.
 
-By the end of the lessons, the new developers would have a confident understanding of the Cyclr system and common procedure, without needing the constant supervision of a developer. That's not to say they will be abandoned during their onboarding, help will always be 1 Slack message away, but to get them used to independently solving problems and building integrations.
+<figure>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/A3Baww3lEBI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</figure>
 
 <figure>
     <img src="../../img/cyclr-sandbox/cyclr-sandbox-chapter-menu.gif">
@@ -41,15 +43,15 @@ By the end of the lessons, the new developers would have a confident understandi
 
 ## The Tech
 
-The entire App was hosting using a single NodeJS server using Express. This was effective since it would be an internal training tool, with a limited pool of active users.
+The entire App was built using a single NodeJS server using Express.
 
-It was developed using Docker to provide portability and GitHub actions were setup to automatically assemble and load a new docker image into Kubernetes on a successful pull request.
+It was developed using Docker to provide portability and GitHub actions were setup to automatically build and load a new docker image into Kubernetes on a successful pull request.
 
-Webpack was used to keep the bundling from /src to /public in a single place, and whilst complicated - allowed me to easily implement certain stages within bundles.
+Webpack was used to keep the bundling from /src to /public in a single place, however the Webpack flow included multiple stages of parsing for markdown files.
 
 ## Custom Markdown Parsing
 
-The 'markdown-it-loader' package enabled me to integrate markdown-it to HTML parsing easily. However, all the functionality I wanted was not there. I wanted to easily take custom blocks within markdown:
+The 'markdown-it-loader' package enabled me to integrate markdown-it to HTML parsing easily. However, I wanted to develop custom markdown blocks for different situations:
 
 <pre>
 ::: mermaid
@@ -58,7 +60,7 @@ A(Variable)-->B(Other)
 :::
 </pre>
 
-and parse these into HTML, with pre-defined styling variables and more.
+and parse these into HTML-ready blocks, with pre-defined styling variables and more.
 
 To do that, I used the following, or similar for other blocks, with each markdown-it loader stage:
 
@@ -88,6 +90,17 @@ render: function (tokens, idx) {
     return markup;
 },
 </pre>
-<figure>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/A3Baww3lEBI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</figure>
+
+Whilst it does the job, in hindsight, this could have been structured in a slightly nicer way so when we return to update the process is slightly clearer. This has been added to the project trello.
+
+## The Results
+
+The initial plan was always to utilise Cyclr Sandbox in the week after the presentation, when we were joined by two new Connector Developers.
+
+We prepared a structured feedback system, with the majority of feedback being loaded straight into a trello board.
+
+The onboarding process was far more steamlined and effective. This was assessed by feedback from the starters, who thoroughly enjoyed the mastery style process and found the challenges enjoyable.
+
+The fact that we managed to cover all the available content within the first 4 days of their onboarding was remarkable. This content matched around two weeks worth of dedicated teaching using our previous onboarding processess and Public APIs.
+
+After those 4 days, the new starters were independently working on the sprint, with an awareness of building custom-connectors in Cyclr that probably took me about three weeks to reach.
