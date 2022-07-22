@@ -4,6 +4,7 @@
   "description": "A new portfolio for me!",
   "main": "index.js",
   "scripts": {
+    "build": "eleventy",
     "test": "npx eleventy --serve",
     "webpack": "webpack --watch"
   },

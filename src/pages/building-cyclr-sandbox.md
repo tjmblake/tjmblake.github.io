@@ -1,10 +1,10 @@
 ---
-title: Improving the Onboarding Processes by 200%+
+title: Improving the Onboarding Process by 200%+
 ---
 
-# Improving the Onboarding Processes by 200%+
+# Improving the Onboarding Process by 200%+
 
-### Taking a 1 month onboarding to a 4 day onboarding
+### From a 1 month onboarding to a 4 day onboarding
 
 <figure>
     <img src="../../img/cyclr-sandbox/cyclr-sandbox-login.png">
@@ -15,7 +15,7 @@ title: Improving the Onboarding Processes by 200%+
 
 At Cyclr, an iPaaS company which provides a zero-code integration platform to businesses, I develop and maintain integrations.
 
-Cyclr is a growing company with recent investment.I
+Cyclr is a growing company with recent investment.
 
 However, with each new developer, begins a period of onboarding - getting them up to speed with our tools and processes.
 
