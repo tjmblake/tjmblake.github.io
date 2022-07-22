@@ -4,7 +4,7 @@
   "description": "A new portfolio for me!",
   "main": "index.js",
   "scripts": {
-    "build": "eleventy",
+    "build": "env NODE_ENV=production npx eleventy --pathprefix 'public'",
     "test": "npx eleventy --serve",
     "webpack": "webpack --watch"
   },
