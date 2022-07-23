@@ -70,12 +70,12 @@
 
       &--me {
         transform: rotateY(-180deg);
-        background-image: url(img/me.png);
+        background-image: url(/img/me.png);
       }
 
       &--dogs {
         transform: rotateY(180deg);
-        background-image: url(img/dogs.png);
+        background-image: url(/img/dogs.png);
       }
 
       &--active {

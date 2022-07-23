@@ -5,9 +5,10 @@
   grid-template-columns: 1fr auto;
 
   padding: 2rem 0;
+  position: relative;
 
   @include respond(small) {
-    grid-template-columns: 100%;
+    grid-template-columns: 1fr;
     grid-template-rows: repeat(2, min-content);
     row-gap: 1rem;
     padding: 1rem 0;
@@ -15,7 +16,9 @@
 
   &__group {
     display: flex;
+    position: relative;
     gap: 3.5rem;
+    width: 100%;
 
     @include respond(small) {
       justify-content: space-around;
