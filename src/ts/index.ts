@@ -129,6 +129,11 @@ window.onload = async () => {
     });
   }
 
+  const scrollIcon = document.querySelector(
+    ".hero__scroll-icon"
+  ) as HTMLElement;
+  if (scrollIcon) scrollIcon.style.transition = "all 1s";
+
   // Hero Text
   anime({
     targets: [".hero .hero__title", ".hero .hero__lead"],

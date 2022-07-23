@@ -162,9 +162,11 @@
 
     border-bottom: 0.1rem solid #fff;
     border-right: 0.1rem solid #fff;
-    opacity: 1;
     height: 1rem;
     width: 1rem;
+
+    opacity: 0;
+    transition: opacity 1s 2s;
 
     transform: rotate(45deg);
     margin-top: 12rem;
