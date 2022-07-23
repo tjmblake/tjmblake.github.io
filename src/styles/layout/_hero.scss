@@ -70,12 +70,20 @@
 
       &--me {
         transform: rotateY(-180deg);
-        background-image: url(/img/me.png);
+        background-image: url(/img/me-500w.jpeg);
+
+        @include respond(small) {
+          background-image: url(/img/me-350w.jpeg);
+        }
       }
 
       &--dogs {
         transform: rotateY(180deg);
-        background-image: url(/img/dogs.png);
+        background-image: url(/img/dogs-500w.jpeg);
+
+        @include respond(small) {
+          background-image: url(/img/dogs-350w.jpeg);
+        }
       }
 
       &--active {
