@@ -21,8 +21,8 @@ However, with each new developer, begins a period of onboarding - getting them u
 
 This can take up to 2 weeks per new starter.
 
-These 2 weeks consisted of working with a developer to build integrations on Public APis.
-The developer would try to explain each aspect of the problem, without any Destructure, and would be jumping between the topics which affected the current problem.
+These 2 weeks consisted of working with a developer to build integrations on Public APIs.
+The developer would try to explain each aspect of the problem, without any structure, and would be jumping between the topics which related to the current problem.
 
 ## This had some issues:
 
