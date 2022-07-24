@@ -1,8 +1,11 @@
 ---
-title: Improving the Onboarding Process by 200%+
+title: Improving Onboarding by 200%+
+cover: "../img/cyclr-sandbox/cyclr-sandbox-chapter-menu.gif"
+coverAlt: "The Cyclr Sandbox Application"
+description: "The Cyclr Sandbox Application"
 ---
 
-# Improving the Onboarding Process by 200%+
+# Improving Onboarding by 200%+
 
 ### From a 1 month onboarding to a 4 day onboarding
 

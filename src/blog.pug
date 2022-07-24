@@ -18,4 +18,10 @@ html(lang="en")
       include _includes/_nav
       main.blogs
         for page of collections.pages
-          a(href=`${page.url}`).link= page.data.title + ' (' + page.date.toISOString().split('T')[0] + ')'
+          div.blogs__post
+            figure
+              img(src=`${page.data.cover}` alt=`${page.data.coverAlt}`)
+            .blogs__post-info
+              a(href=`${page.url}`).link.blogs__post-title= page.data.title
+              <br />
+              span.blogs__post-desc= page.data.description
