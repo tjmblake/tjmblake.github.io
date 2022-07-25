@@ -103,7 +103,27 @@ render: function (tokens, idx) {
 },
 </pre>
 
-Whilst it does the job, in hindsight, this could have been structured in a nicer way so when we return to update the process is slightly clearer. This has been added to the project trello.
+Whilst it does the job, in hindsight, this could have been structured in a nicer way so when we return to update the process, it is clearer. This has been added to the project's trello.
+
+<figure>
+    <img src="../../img/cyclr-sandbox/cyclr-sandbox-chart-quiz.gif">
+    <figcaption>Custom Parsed Quiz Module</figcaption>
+</figure>
+
+## Embedded Documentation
+
+I was surprised to find no existing way to embed documentation from a Postman collection so developed a module to do just that.
+
+When a user loads a lesson, custom-parsed method blocks (from the previous section) force an API call. The API call returns the relevent methods documentation from an exported Postman collection.
+
+This way, the documentation is easily maintainable and editable in 1 place.
+
+<figure>
+    <img src="../../img/cyclr-sandbox/cyclr-sandbox-method.gif">
+    <figcaption>Embedded Postman Documentation</figcaption>
+</figure>
+
+The data provided, terminology used and styling resemble API documentation Connector Developers should be decoding in their role.
 
 ## The Results
 
@@ -118,3 +138,12 @@ The fact that we covered all the available content within the first 4 days of th
 These 4 days matched around three weeks worth of dedicated teaching using our previous onboarding processess and Public APIs.
 
 After those 4 days, the new starters were independently working on the sprint, with an awareness of building custom-connectors in Cyclr.
+
+<figure>
+    <img src="../../img/cyclr-sandbox/cyclr-sandbox-tip-gif.gif">
+    <figcaption>More Embedded Components</figcaption>
+</figure>
+
+## Join Us
+
+Cyclr is a rapidly growing company based across London, Brighton and Eastbourne. If you're interested in joining us, please check out our [Hiring Page](https://cyclr.com/we-are-hiring).
