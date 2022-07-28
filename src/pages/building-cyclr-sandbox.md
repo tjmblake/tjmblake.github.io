@@ -7,7 +7,7 @@ description: "The Cyclr Sandbox Application"
 
 # Improving Onboarding by 200%+
 
-### From a 1 month onboarding to a 4 day onboarding
+### From a 2 week onboarding to a 4 day onboarding
 
 <figure>
     <img src="../../img/cyclr-sandbox/cyclr-sandbox-login.png">
