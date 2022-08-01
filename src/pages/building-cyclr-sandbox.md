@@ -3,6 +3,7 @@ title: Improving Onboarding by 200%+
 cover: "../img/cyclr-sandbox/cyclr-sandbox-chapter-menu.gif"
 coverAlt: "The Cyclr Sandbox Application"
 description: "The Cyclr Sandbox Application"
+dateCreated: 2022-07-25
 ---
 
 # Improving Onboarding by 200%+

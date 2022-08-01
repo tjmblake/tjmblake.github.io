@@ -17,7 +17,9 @@ html(lang="en")
     .grid.home
       include _includes/_nav
       main.blogs
-        for page of collections.pages
+        - const sorted = collections.pages.sort((a,b)=> b.data.dateCreated.getTime() - a.data.dateCreated.getTime())
+        - console.log(sorted.map(el => el.data.title))
+        for page of sorted
           div.blogs__post
             figure
               img(src=`${page.data.cover}` alt=`${page.data.coverAlt}`)
@@ -25,3 +27,4 @@ html(lang="en")
               a(href=`${page.url}`).link.blogs__post-title= page.data.title
               <br />
               span.blogs__post-desc= page.data.description
+              h6= page.data.dateCreated.toLocaleDateString('en-GB')
