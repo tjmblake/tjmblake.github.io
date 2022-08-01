@@ -1,6 +1,6 @@
 ---
 title: Automating Peer Review
-cover: "../img/cyclr-json-Scripts/cyclr-json-scripts.png"
+cover: "../img/cyclr-json-scripts/cyclr-json-scripts.png"
 coverAlt: "The Cyclr JSON Scripts Application"
 description: "Simple, helpful dev tools"
 ---
