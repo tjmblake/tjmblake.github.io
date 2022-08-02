@@ -82,7 +82,7 @@ window.onload = async () => {
     ],
     easing: "easeInOutSine",
     duration: 300,
-    delay: 600,
+    delay: 450,
     autoplay: false,
   });
 
@@ -90,7 +90,7 @@ window.onload = async () => {
     targets: ".skills .skills__group *",
     scale: [0, 1],
     duration: 300,
-    delay: anime.stagger(20, { start: 700 }),
+    delay: anime.stagger(20, { start: 500 }),
     easing: "easeOutElastic",
     autoplay: false,
   });
