@@ -27,7 +27,6 @@ anime({
 });
 
 window.onload = async () => {
-  console.log(innerHeight);
   const options = {
     cursorOuter: "circle-basic",
     hoverEffect: "pointer-overlay",
@@ -90,7 +89,7 @@ window.onload = async () => {
     targets: ".skills .skills__group *",
     scale: [0, 1],
     duration: 300,
-    delay: anime.stagger(20, { start: 500 }),
+    delay: anime.stagger(20, { grid: [9, 3], from: "first", start: 750 }),
     easing: "easeOutElastic",
     autoplay: false,
   });
