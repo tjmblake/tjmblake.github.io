@@ -153,7 +153,6 @@ window.onload = async () => {
       new Observer(`#${el.id}`, {
         callback: skillsGroupAnimation,
         isIntersecting: true,
-        devMode: true,
       })
   );
 
