@@ -1,5 +1,7 @@
 import anime from "animejs";
 import { magicMouse } from "magicmouse.js";
+import Observer from "./observer";
+
 import "../styles/main.scss";
 
 const wait = (secs: number) =>
@@ -19,11 +21,17 @@ anime({
   opacity: 0,
   duration: 0,
 });
+
 anime({
   targets: [".projects p"],
   translateX: anime.stagger(500, { grid: [2, 2], from: "center", axis: "x" }),
   opacity: 0,
   duration: 0,
+});
+
+anime({
+  targets: [`#experienced *`, `#learning *`, `#interested *`],
+  scale: 0,
 });
 
 window.onload = async () => {
@@ -39,60 +47,115 @@ window.onload = async () => {
 
   await wait(0.2);
 
-  const heroArrowAnimation = anime({
-    targets: ".hero .hero__scroll-icon",
-    opacity: [1, 0],
-    easing: "easeInOutSine",
-    duration: 300,
-    autoplay: false,
+  // HERO ARROW
+
+  const heroArrowAnimation = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver
+  ) => {
+    anime({
+      targets: ".hero__scroll-icon",
+      opacity: [1, 0],
+      easing: "easeInOutSine",
+      duration: 100,
+    });
+  };
+
+  const HeroArrowObserver = new Observer(".hero__scroll-icon", {
+    callback: heroArrowAnimation,
+    intOptions: {
+      threshold: 0.5,
+      rootMargin: "-60% 0% 0% 0%",
+    },
+    isIntersecting: false,
   });
 
-  const projectSectionAnimation = anime({
-    targets: ".projects",
-    keyframes: [
-      { translateY: 30, opacity: 0 },
-      { translateY: 0, opacity: 1 },
-    ],
-    easing: "easeInOutSine",
-    duration: 300,
-    autoplay: false,
+  // PROJECTS SECTION
+
+  const projectSectionAnimation = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver
+  ) => {
+    anime({
+      targets: ".projects",
+      keyframes: [
+        { translateY: 30, opacity: 0 },
+        { translateY: 0, opacity: 1 },
+      ],
+      easing: "easeInOutSine",
+      duration: 800,
+    });
+
+    // Each Project
+    anime({
+      targets: ".projects p",
+      translateX: anime.stagger(0, {
+        grid: [2, 2],
+        from: "center",
+        axis: "x",
+      }),
+      opacity: 1,
+
+      easing: "easeInOutSine",
+      delay: anime.stagger(200, { start: 300 }),
+      duration: 1000,
+    });
+  };
+
+  const ProjectObserver = new Observer(".projects", {
+    callback: projectSectionAnimation,
+    isIntersecting: true,
   });
 
-  const projectsAnimation = anime({
-    targets: ".projects p",
-    translateX: anime.stagger(0, {
-      grid: [2, 2],
-      from: "center",
-      axis: "x",
-    }),
-    opacity: 1,
+  // SKILLS SECTION
 
-    easing: "easeInOutSine",
-    delay: anime.stagger(40, { start: 200 }),
-    duration: 300,
-    autoplay: false,
+  const skillSectionAnimation = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver
+  ) =>
+    anime({
+      targets: ".skills",
+      keyframes: [
+        { translateY: 30, opacity: 0 },
+        { translateY: 0, opacity: 1 },
+      ],
+      easing: "easeInOutSine",
+      duration: 200,
+    });
+
+  const SkillsObserver = new Observer(".skills", {
+    callback: skillSectionAnimation,
+    isIntersecting: true,
   });
 
-  const skillSectionAnimation = anime({
-    targets: ".skills",
-    keyframes: [
-      { translateY: 30, opacity: 0 },
-      { translateY: 0, opacity: 1 },
-    ],
-    easing: "easeInOutSine",
-    duration: 300,
-    delay: 450,
-    autoplay: false,
-  });
+  // SKILLS (EACH GROUP)
 
-  const skillsGroupAnimation = anime({
-    targets: ".skills .skills__group *",
-    scale: [0, 1],
-    duration: 300,
-    delay: anime.stagger(20, { grid: [9, 3], from: "first", start: 750 }),
-    easing: "easeOutElastic",
-    autoplay: false,
-  });
+  const skillsGroupAnimation = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver
+  ) =>
+    anime({
+      targets: `#${entries[0].target.id} *`,
+      scale: [0, 1],
+      duration: 1000,
+      delay: anime.stagger(30, { start: 200 }),
+      easing: "easeOutElastic",
+    });
+
+  const skillsGroups = [
+    ...(document.querySelectorAll(
+      ".skills .skills__group"
+    ) as unknown as HTMLElement[]),
+  ];
+
+  const SkillsGroupObserver = skillsGroups?.map(
+    (el) =>
+      new Observer(`#${el.id}`, {
+        callback: skillsGroupAnimation,
+        isIntersecting: true,
+        devMode: true,
+      })
+  );
 
   // Load in Nav bar
   anime({
@@ -131,7 +194,11 @@ window.onload = async () => {
   const scrollIcon = document.querySelector(
     ".hero__scroll-icon"
   ) as HTMLElement;
-  if (scrollIcon) scrollIcon.style.transition = "all 1s";
+  if (scrollIcon) {
+    scrollIcon.style.transition = "all 0.5s";
+    await wait(0.5);
+    scrollIcon.style.opacity = "1";
+  }
 
   // Hero Text
   anime({
@@ -142,12 +209,4 @@ window.onload = async () => {
     duration: 2000,
     easing: "easeOutElastic",
   });
-
-  window.onscroll = (e) => {
-    heroArrowAnimation.seek(scrollY);
-    projectSectionAnimation.seek(scrollY);
-    projectsAnimation.seek(scrollY);
-    skillSectionAnimation.seek(scrollY);
-    skillsGroupAnimation.seek(scrollY);
-  };
 };
