@@ -1,0 +1,102 @@
+:root {
+	/* Colours taken from rose-pine */
+	--base: #191724;
+	--surface: #1f1d2e;
+	--text: #e0def4;
+	/* Builtins, error, deleted git */
+	--love: #eb6f92;
+	/* Strings, warnings */
+	--gold: #f6c177;
+	/* Bools, functions */
+	--rose: #ebbcba;
+	/* Conditionals, keywords */
+	--pine: #31748f;
+	/* Keys, tags, types, diagnostic info */
+	--foam: #9ccfd8;
+	/* Methods, parameters, diagnostic hints, inline links */
+	--iris: #c4a7e7;
+}
+
+body {
+	background-color: var(--base);
+	font-family: verdana, sans-serif;
+	color: var(--text);
+}
+
+img {
+	width: 100%;
+}
+
+article {
+	max-width: 720px;
+	padding: 0 5% 5% 5%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+ul {
+  list-style: none; /* Remove default bullets */
+}
+
+ul li::before {
+  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: var(--iris); /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+  margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
+
+li {
+	color: var(--text);
+	font-size: 1.2rem;
+	line-height: 1.7;
+}
+
+/* Heading styles */
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+}
+
+h1 {
+  font-size: 2.5rem; 
+  line-height: 1.2; 
+  color: var(--gold);
+}
+
+h2 {
+  font-size: 2rem; 
+  line-height: 1.3; 
+  color: var(--foam);
+}
+
+h3 {
+  font-size: 1.75rem; 
+  line-height: 1.4; 
+  color: var(--iris);
+}
+
+h4 {
+  font-size: 1.5rem; 
+  line-height: 1.5; 
+}
+
+h5 {
+  font-size: 1.25rem; 
+  line-height: 1.6; 
+}
+
+h6 {
+  font-size: 1.21rem; 
+  line-height: 1.7; 
+}
+
+p {
+	color: var(--text);
+	font-size: 1.2rem;
+	line-height: 1.5;
+}
+
+a {
+	color: var(--iris);
+}
