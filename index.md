@@ -15,9 +15,7 @@ The languages I have worked with are:
 - PHP
 - Lua
 
-I'm interested in learning more about DDD, event-driven architecture and NeoVim.
-
 ## Why a blog? 
 
-This blog is not written to be read. I am using it to reinforce the concepts I am learning.
+I am using this blog to reinforce the concepts I am learning.
 
