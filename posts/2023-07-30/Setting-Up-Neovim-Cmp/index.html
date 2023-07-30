@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setting up Neovim Cmp</title>
+	<link rel="stylesheet" href="/bundle.css">
+	<link rel="stylesheet" href="/prism-rose-pine-main-alt.css">
+  </head>
+  <body>
+	<article>
+	<h1>Setting up Neovim Cmp</h1>
+	<code>Updated: 7/30/2023</code>
+    <p>Following on from the previous post, using Neovim LSP with just omnifunc
+is a bit miserable. So I'm looking to fix that.</p>
+<h2>What is Neovim completion?</h2>
+<p>It is Neovim's implementation of auto-complete, a tool you find in other editors.</p>
+<p>As you type, Neovim will provide suggestions for what you are currently typing.</p>
+<p>From here, you can view documentation (if provided via LSP) and auto-complete
+the suggestion, saving you from typing it.</p>
+<p><img src="../img/go-cmp-example.png" alt="Example Neovim completion"></p>
+<h2>How to set it up?</h2>
+<p>Install the following plugins depending on the functionality you want:</p>
+<pre class="language-lua"><code class="language-lua">	<span class="token comment">-- Provides the initial cmp implementation</span>
+	use <span class="token string">'hrsh7th/nvim-cmp'</span>
+
+	<span class="token comment">-- cmp source from LSP's</span>
+	use <span class="token string">'hrsh7th/cmp-nvim-lsp'</span>
+
+	<span class="token comment">-- cmp source for nvim in lua (makes Neovim api available)</span>
+	use <span class="token string">'hrsh7th/cmp-nvim-lua'</span>
+
+	<span class="token comment">-- cmp source from current buffer</span>
+	use <span class="token string">'hrsh7th/cmp-buffer'</span>
+
+	<span class="token comment">-- cmp source from file-system </span>
+	use <span class="token string">'hrsh7th/cmp-path'</span></code></pre>
+<p>Import cmp and setup some select opts.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> cmp <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cmp'</span><span class="token punctuation">)</span>
+<span class="token keyword">local</span> cmp_select_opts <span class="token operator">=</span> <span class="token punctuation">{</span> behavior <span class="token operator">=</span> cmp<span class="token punctuation">.</span>SelectBehavior<span class="token punctuation">.</span>Select <span class="token punctuation">}</span></code></pre>
+<p>Implement functionality:</p>
+<pre class="language-lua"><code class="language-lua">cmp<span class="token punctuation">.</span><span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+	sources <span class="token operator">=</span> <span class="token punctuation">{</span>
+		<span class="token punctuation">{</span> name <span class="token operator">=</span> <span class="token string">'nvim_lsp'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">-- Completion from LSP</span>
+		<span class="token punctuation">{</span> name <span class="token operator">=</span> <span class="token string">'nvim_lua'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">-- Neovim API completion in lua</span>
+		<span class="token punctuation">{</span> name <span class="token operator">=</span> <span class="token string">'path'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">-- Completion based on file-system</span>
+		<span class="token punctuation">{</span> name <span class="token operator">=</span> <span class="token string">'buffer'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">-- Completion based on current buffer content</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	mapping <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token comment">-- Controls for handling cmp pop-ups </span>
+		<span class="token punctuation">[</span><span class="token string">'&lt;C-y>'</span><span class="token punctuation">]</span> <span class="token operator">=</span> cmp<span class="token punctuation">.</span>mapping<span class="token punctuation">.</span><span class="token function">confirm</span><span class="token punctuation">(</span><span class="token punctuation">{</span> select <span class="token operator">=</span> <span class="token keyword">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token punctuation">[</span><span class="token string">'&lt;C-e>'</span><span class="token punctuation">]</span> <span class="token operator">=</span> cmp<span class="token punctuation">.</span>mapping<span class="token punctuation">.</span><span class="token function">abort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token punctuation">[</span><span class="token string">'&lt;C-u>'</span><span class="token punctuation">]</span> <span class="token operator">=</span> cmp<span class="token punctuation">.</span>mapping<span class="token punctuation">.</span><span class="token function">scroll_docs</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token punctuation">[</span><span class="token string">'&lt;C-d>'</span><span class="token punctuation">]</span> <span class="token operator">=</span> cmp<span class="token punctuation">.</span>mapping<span class="token punctuation">.</span><span class="token function">scroll_docs</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token punctuation">[</span><span class="token string">'&lt;Up>'</span><span class="token punctuation">]</span> <span class="token operator">=</span> cmp<span class="token punctuation">.</span>mapping<span class="token punctuation">.</span><span class="token function">select_prev_item</span><span class="token punctuation">(</span>cmp_select_opts<span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token punctuation">[</span><span class="token string">'&lt;Down>'</span><span class="token punctuation">]</span> <span class="token operator">=</span> cmp<span class="token punctuation">.</span>mapping<span class="token punctuation">.</span><span class="token function">select_next_item</span><span class="token punctuation">(</span>cmp_select_opts<span class="token punctuation">)</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	window <span class="token operator">=</span> <span class="token punctuation">{</span>
+		documentation <span class="token operator">=</span> <span class="token punctuation">{</span>
+			max_height <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">,</span>
+			max_width <span class="token operator">=</span> <span class="token number">60</span><span class="token punctuation">,</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	formatting <span class="token operator">=</span> <span class="token punctuation">{</span>
+		fields <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token string">'abbr'</span><span class="token punctuation">,</span> <span class="token string">'menu'</span><span class="token punctuation">,</span> <span class="token string">'kind'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+		format <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>entry<span class="token punctuation">,</span> item<span class="token punctuation">)</span>
+			<span class="token keyword">local</span> short_name <span class="token operator">=</span> <span class="token punctuation">{</span>
+				nvim_lsp <span class="token operator">=</span> <span class="token string">'LSP'</span><span class="token punctuation">,</span>
+				nvim_lua <span class="token operator">=</span> <span class="token string">'nvim'</span><span class="token punctuation">,</span>
+				path <span class="token operator">=</span> <span class="token string">'path'</span><span class="token punctuation">,</span>
+				buffer <span class="token operator">=</span> <span class="token string">'buffer'</span>
+			<span class="token punctuation">}</span>
+
+			<span class="token keyword">local</span> menu_name <span class="token operator">=</span> short_name<span class="token punctuation">[</span>entry<span class="token punctuation">.</span>source<span class="token punctuation">.</span>name<span class="token punctuation">]</span> <span class="token keyword">or</span> entry<span class="token punctuation">.</span>source<span class="token punctuation">.</span>name
+
+			item<span class="token punctuation">.</span>menu <span class="token operator">=</span> string<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">'[%s]'</span><span class="token punctuation">,</span> menu_name<span class="token punctuation">)</span>
+			<span class="token keyword">return</span> item
+		<span class="token keyword">end</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	preselect <span class="token operator">=</span> <span class="token string">'item'</span><span class="token punctuation">,</span>
+	completion <span class="token operator">=</span> <span class="token punctuation">{</span>
+		completeopt <span class="token operator">=</span> <span class="token string">'menu,menuone,noinsert'</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
+<h2>Summary</h2>
+<p>The steps to implement cmp within Neovim.</p>
+<p>Most of this information was gathered from lsp-zero documentation, and then
+looking at the contents of these plugins to unpick what was happening.</p>
+<p>I then took away anything unnecessary so I have a small, simple implementation.</p>
+<p>I'd like to explore cmp more, using Neovim's api, when I get the time.</p>
+
+	</article>
+	<ul>
+	</ul>
+  </body>
+</html>
