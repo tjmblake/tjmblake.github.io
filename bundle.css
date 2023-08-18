@@ -99,4 +99,5 @@ p {
 
 a {
 	color: var(--iris);
+	line-height: 1.5;
 }

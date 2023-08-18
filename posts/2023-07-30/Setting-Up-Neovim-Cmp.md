@@ -2,7 +2,7 @@
 layout: post-layout
 tags: post
 title: Setting up Neovim Cmp 
-date: Last Modified 
+date: git Created 
 ---
 
 Following on from the previous post, using Neovim LSP with just omnifunc 

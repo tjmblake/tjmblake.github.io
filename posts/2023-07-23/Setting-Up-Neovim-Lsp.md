@@ -2,7 +2,7 @@
 layout: post-layout
 tags: post
 title: Setting up Neovim LSP
-date: Last Modified 
+date: git Created
 ---
 
 A goal of mine is to, by the end of the year, contribute to Neovim. 
