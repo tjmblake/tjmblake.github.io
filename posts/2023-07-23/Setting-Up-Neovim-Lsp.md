@@ -38,7 +38,6 @@ For my work, I will need to setup the following LSPs.
 - Go
 - Lua
 - Typescript
-- Eslint 
 - CSS
 - Prettier
 - PHP 
@@ -267,7 +266,7 @@ such as vim.lsp. I will fix this later when I handle completion (to be written).
 
 The main thing is this removes the 'vim namespace not found' errors.
 
-## Set up LSP for Typescript, Eslint
+## Set up LSP for Typescript
 
 This will require having the vscode extracted 
 [language servers](https://github.com/hrsh7th/vscode-langservers-extracted) installed,
@@ -301,74 +300,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end
 })
 ```
-
-### Setup Eslint
-
-Eslint was straightforward to setup. I went and borrowed the settings configuration
-from nvim-lspconfig again. 
-
-```lua
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = {
-		'javascript',
-		'javascriptreact',
-		'javascript.jsx',
-		'typescript',
-		'typescriptreact',
-		'typescript.tsx',
-	},
-	callback = function()
-		local root_dir = vim.fs.dirname(
-			vim.fs.find({ '.eslintrc' }, { upward = true })[1]
-		)
-		local client = vim.lsp.start({
-			name = "eslint",
-			cmd = { 'vscode-eslint-language-server', '--stdio' },
-			root_dir = root_dir,
-			settings = {
-				validate = 'on',
-				packageManager = 'yarn',
-				useESLintClass = false,
-				experimental = {
-					useFlatConfig = false,
-				},
-				codeActionOnSave = {
-					enable = false,
-					mode = 'all',
-				},
-				format = true,
-				quiet = false,
-				onIgnoredFiles = 'off',
-				rulesCustomizations = {},
-				run = 'onType',
-				problems = {
-					shortenToSingleLine = false,
-				},
-				nodePath = '',
-				workingDirectory = { mode = 'location' },
-				codeAction = {
-					disableRuleComment = {
-						enable = true,
-						location = 'separateLine',
-					},
-					showDocumentation = {
-						enable = true,
-					},
-				},
-			},
-		})
-		vim.lsp.buf_attach_client(0, client)
-	end,
-})
-```
-
-The reason I am showing these alternate configurations is to show that there are 
-only minor differences, specific to the LSP's root_dir pattern or settings. 
-
-Otherwise, it's fairly consistent.
-
-This is because LSP is a protocol for communicating between a editor/client 
-and language server.
 
 ## Binding common LSP functions
 

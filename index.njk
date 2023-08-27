@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+	<link rel="stylesheet" href="/bundle.css">
+	<link rel="stylesheet" href="/prism-rose-pine-main-alt.css">
+	<script src="/index.js"></script>
+  </head>
+  <body>
+    <section>
+        <h1>tjmblake</h1>
+        <a href="#blog">Blog</a>
+    </section>
+    <section id="blog">
+      <h2>Blog</h2>
+      <ul>
+        {%- for post in collections.post | reverse -%}
+          <li><a href="{{ post.url }}">{{ post.date.toLocaleDateString('en-GB') }} - {{ post.data.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </section>
+  </body> 
+</html>

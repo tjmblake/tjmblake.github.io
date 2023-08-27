@@ -17,14 +17,48 @@
 	--iris: #c4a7e7;
 }
 
+html, body, section {
+  block-size: 100%;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  background: var(--base);
+}
+
 body {
-	background-color: var(--base);
 	font-family: verdana, sans-serif;
 	color: var(--text);
+	margin:0;
+}
+
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+	text-align: center;
+}
+
+section:nth-of-type(even) {
+  background: var(--base);
+}
+
+section:nth-of-type(odd) {
+  background: var(--surface);
 }
 
 img {
 	width: 100%;
+}
+
+header {
+	max-width: 720px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 article {
@@ -32,6 +66,11 @@ article {
 	padding: 0 5% 5% 5%;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+ol {
+  list-style-position: inside;
+  padding-left: 0;
 }
 
 ul {
@@ -100,4 +139,12 @@ p {
 a {
 	color: var(--iris);
 	line-height: 1.5;
+}
+
+#myCanvas {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0 auto;
 }
